@@ -48,7 +48,29 @@ public class Materia extends Curso {
     }
 
     //Métodos 
-    
+    public void inscribir(){
+        if (getEstado() != EstadoCurso.ABIERTO) {
+            System.out.println("No se puede inscribir");
+            return;
+        }
+        if (getInscriptos() >= this.getCupoMaximo()) {
+            System.out.println("No hay cupos disponibles");
+            return;
+        }
+
+        setInscriptos(getInscriptos() + 1);
+        System.out.println("Inscripción realizada correctamente.");
+    }
+
+    @Override
+    public void darDeBaja(){
+        if (getInscriptos() > 0) {
+            setInscriptos(getInscriptos() - 1);
+            System.out.println("Baja realizada correctamente.");
+        } else {
+            System.out.println("No hay inscriptos para dar de baja.");
+        }
+    }
 
 
     // Implementación obligatoria del método abstracto definido en Curso.
