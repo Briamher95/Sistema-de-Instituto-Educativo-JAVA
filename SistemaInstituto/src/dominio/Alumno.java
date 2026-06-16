@@ -24,6 +24,18 @@ public class Alumno extends Persona{
         System.out.println("Curso:"+ c.getNombre());
     }
     public void darDeBaja(){
-        
     }
+
+    public ArrayList<Curso> getCursosInscriptos() {
+    return cursosInscriptos;
+    }
+
+    public int getLegajo() {
+    return legajo;
+    }
+
+    public void setLegajo(int legajo) {
+        this.legajo = legajo;
+    }
+
 }

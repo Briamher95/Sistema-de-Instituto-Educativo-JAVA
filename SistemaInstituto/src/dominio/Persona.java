@@ -26,12 +26,11 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
         return nombre;
     }
 
-    //**SETTERS**
-
     public String getApellido(){
         return apellido;
     }
 
+    //**SETTERS**
 
     public void setDni(int dni){
         this.dni = dni;
