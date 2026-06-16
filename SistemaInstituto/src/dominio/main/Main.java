@@ -1,8 +1,5 @@
 package dominio.main;
-import dominio.Alumno;
-import dominio.Curso;
-import dominio.Docente;
-import enums.EstadoCurso;
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
