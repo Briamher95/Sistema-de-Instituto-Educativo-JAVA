@@ -69,8 +69,8 @@ public abstract class Curso implements IInscribible , Serializable
 
     public abstract String getModalidad();
 
-    public void inscribir(){};
-    public void darDeBaja(){};
-
+    public abstract void inscribir();
+    public abstract void darDeBaja();
+    
 
 }
