@@ -4,7 +4,7 @@ import enums.EstadoCurso;
 import java.io.Serializable;
 
 
-public abstract class Curso implements IInscribible , Serializable 
+public class Curso implements IInscribible , Serializable 
 {
     private Integer id;
     private String nombre;
@@ -70,7 +70,7 @@ public abstract class Curso implements IInscribible , Serializable
         System.out.println("Estado: " + estado);
     }
 
-    public abstract String getModalidad();
+    //public abstract String getModalidad();
 
     public void inscribir(){};
     public void darDeBaja(){};
