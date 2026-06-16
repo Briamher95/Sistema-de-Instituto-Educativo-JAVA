@@ -59,9 +59,6 @@ public abstract class Curso implements IInscribible , Serializable
         this.estado = estado;
     }
 
-
-
-
     public  void monstrarInfo(){
         System.out.println("ID: " + id);
         System.out.println("Nombre: " + nombre);
