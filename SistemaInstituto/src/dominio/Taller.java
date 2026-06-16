@@ -75,9 +75,6 @@ public class Taller extends Curso {
     public String getModalidad() {
         return esPractico ? "Práctico" : "Teórico";
     }
-
-
-
 }
 
 
