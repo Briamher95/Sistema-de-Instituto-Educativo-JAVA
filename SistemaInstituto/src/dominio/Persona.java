@@ -2,11 +2,11 @@ package dominio;
 import java.io.Serializable;
 
 public abstract class Persona implements Serializable, Comparable<Persona> {
-    private int dni;
+    private int dni; //Clase privada para registrar id de las personas
     private String nombre;
     private String apellido;
     
-    public abstract void mostrarInfo();
+    public abstract void mostrarInfo(); //Metodo usado para herencia 
 
     //***CONSTRUCTOR***
     public Persona(int dni, String nombre, String apellido) {
@@ -48,6 +48,8 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
     }
 
     //***HASHCODE & EQUALS***
+    //Comentario:
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -55,6 +57,7 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
         return result;
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
