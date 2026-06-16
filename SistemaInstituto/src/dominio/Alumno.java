@@ -47,4 +47,17 @@ public class Alumno extends Persona{
             c.monstrarInfo();
         }
     }
+
+    public ArrayList<Curso> getCursosInscriptos() {
+    return cursosInscriptos;
+    }
+
+    public int getLegajo() {
+    return legajo;
+    }
+
+    public void setLegajo(int legajo) {
+        this.legajo = legajo;
+    }
+
 }
