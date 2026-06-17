@@ -69,4 +69,14 @@ public class Instituto {
                 });
     }
 
+    //Mostrar los cursosOrdenados
+
+    public void mostrarCursosOrdenados(){
+        System.out.println("Cursos ordenados por nombre:");
+        cursos.stream()
+                .sorted((c1,c2)-> c1.getNombre().compareTo(c2.getNombre()))
+                //Se lee como "para cada elemento, llamá al mostrarInfo de Curso"
+                .forEach(Curso::monstrarInfo);
+    }
+
 }   
