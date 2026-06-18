@@ -4,7 +4,7 @@ import enums.EstadoCurso;
 import java.io.Serializable;
 
 
-public abstract class Curso implements IInscribible , Serializable 
+public abstract class Curso implements IInscribible , Serializable, Comparable<Curso> 
 {
     private Integer id;
     private String nombre;
@@ -59,6 +59,9 @@ public abstract class Curso implements IInscribible , Serializable
         this.estado = estado;
     }
 
+
+
+
     public  void monstrarInfo(){
         System.out.println("ID: " + id);
         System.out.println("Nombre: " + nombre);
@@ -69,8 +72,45 @@ public abstract class Curso implements IInscribible , Serializable
 
     public abstract String getModalidad();
 
-    public abstract void inscribir();
-    public abstract void darDeBaja();
-    
+     public void inscribir(){
+        if (getEstado() != EstadoCurso.ABIERTO) {
+            System.out.println("No se puede inscribir");
+            return;
+        }
+        if (getInscriptos() >= this.getCupoMaximo()) {
+            System.out.println("No hay cupos disponibles");
+            setEstado(EstadoCurso.CERRADO);
+            return;
+        }
 
+        setInscriptos(getInscriptos() + 1);
+        System.out.println("Inscripción realizada correctamente.");
+        
+
+    }
+
+    
+    public void darDeBaja(){
+        if (getInscriptos() > 0) {
+            setInscriptos(getInscriptos() - 1);
+            System.out.println("Baja realizada correctamente.");
+        } else {
+            System.out.println("No hay inscriptos para dar de baja.");
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Curso other = (Curso) obj;
+        return this.id.equals(other.id);
+}
+
+    @Override
+    public int compareTo(Curso c) {
+        return this.nombre.compareTo(c.getNombre());
+    }
+    
 }

@@ -1,6 +1,7 @@
 package dominio;
 import java.util.ArrayList;
 
+import dominio.interfaces.InscripcionException;
 import enums.EstadoCurso;
 
 public class Alumno extends Persona{
@@ -22,6 +23,7 @@ public class Alumno extends Persona{
         System.out.println("Legajo:"+ legajo);
     }
     //**METODO INSCRIBIR CURSO**
+
     public void inscribirCurso(Curso c) throws InscripcionException {
         if(cursosInscriptos.contains(c)){
             throw new InscripcionException("El alumno ya se encuentra inscripto en este curso.");
@@ -35,6 +37,7 @@ public class Alumno extends Persona{
             System.out.println("Curso:"+ c.getNombre());
         }
     }
+
     //**METODO DAR DE BAJA**
     public void darDeBaja(Curso c){
         if(!cursosInscriptos.contains(c)){

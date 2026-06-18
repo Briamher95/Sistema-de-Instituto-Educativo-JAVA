@@ -46,32 +46,7 @@ public class Seminario extends Curso {
         this.esVirtual = esVirtual;
     }
 
-    public void inscribir() {
-        if (getEstado() != EstadoCurso.ABIERTO) {
-            System.out.println("No se puede inscribir");
-            return;
-        }
-        if (getInscriptos() >= this.getCupoMaximo()) {
-            System.out.println("No hay cupos disponibles");
-            return;
-        }
-        setInscriptos(getInscriptos() + 1);
-        System.out.println("Inscripción exitosa");
-    }
 
-    @Override
-    public void darDeBaja() {
-        if (getEstado() != EstadoCurso.ABIERTO) {
-            System.out.println("No se puede dar de baja");
-            return;
-        }
-        if (getInscriptos() <= 0) {
-            System.out.println("No hay inscriptos para dar de baja");
-            return;
-        }
-        setInscriptos(getInscriptos() - 1);
-        System.out.println("Baja realizada correctamente.");
-    }
 
     // Implementación obligatoria del método abstracto de Curso
     @Override
@@ -79,4 +54,15 @@ public class Seminario extends Curso {
         return esVirtual ? "Virtual" : "Presencial";
     }
 
+    // Muestra información adicional del seminario
+    @Override
+    public void monstrarInfo() {
+
+        super.monstrarInfo();
+
+        System.out.println("Duración (días): " + duracionDias);
+        System.out.println("Modalidad: " + getModalidad());
+    }
+    
+    
 }
