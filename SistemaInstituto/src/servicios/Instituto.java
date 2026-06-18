@@ -6,19 +6,26 @@ import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
+import java.util.HashSet;
 
 import dominio.Persona;
 import dominio.Curso;
 import dominio.Alumno;
+import dominio.interfaces.InscripcionException;
+import dominio.interfaces.IRepositorio;
 
 public class Instituto {
 
     private ArrayList<Curso> cursos;
     private HashMap<Integer, Persona> personas;
+    private HashSet<Persona> alumnosInscriptos;
+    private IRepositorio repositorio;
 
     public Instituto(){
         this.cursos = new ArrayList<>();
         this.personas = new HashMap<>();
+        this.alumnosInscriptos = new HashSet<>();
+        this.repositorio = new Repositorio("cursos.dat");
     }
  //Getters y Setters
     public ArrayList<Curso> getCursos() {
@@ -92,7 +99,6 @@ public class Instituto {
 
     //Busca alumnos por el Dni
     //Santi esta es el metodo que tenes que usar para que el menu pueda buscar a los alumnos por su dni y mostrar su info, si te da null es poruq no hay ninguno.
-
     public Alumno buscarAlumno( int dni){
 
         Persona p = personas.get(dni);
@@ -114,5 +120,25 @@ public class Instituto {
                                 .count();
     }
 
+    public void InscribirAlumnoACurso(int dni, String nombreCurso) throws InscripcionException{
+        Alumno alumno = buscarAlumno(dni);
+        Curso curso = buscarCurso(nombreCurso);
+        if (alumno == null || curso == null) {
+            System.out.println("Alumno o curso no encontrado");
+            return;
+        }
+        alumno.inscribirCurso(curso);
+        alumnosInscriptos.add(alumno);
+
+    }
+
+    public  void guardarDatos(){
+        repositorio.guardar(cursos);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void cargarDatos(){
+        cursos = (ArrayList<Curso>) repositorio.consultar();
+    }
 
 }   
