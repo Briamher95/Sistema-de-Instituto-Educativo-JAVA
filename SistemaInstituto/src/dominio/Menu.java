@@ -1,6 +1,8 @@
 package dominio;
+import java.util.List;
 import java.util.Scanner;
 
+import dominio.interfaces.InscripcionException;
 import enums.EstadoCurso;
 import servicios.Instituto;
 
@@ -61,15 +63,83 @@ public class Menu {
         System.out.println("Curso agregado exitosamente");
     }
 
+    public void registrarAlumno(){
+        System.out.println("Ingrese el dni del alumno:");
+        int dni = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Ingrese el nombre del alumno:");
+        String nombre = scanner.nextLine();
+        System.out.println("Ingrese el apellido del alumno:");
+        String apellido = scanner.nextLine();
+        System.out.println("Ingrese el legajo del alumno:");
+        int legajo = scanner.nextInt();
+        scanner.nextLine();
+
+        Alumno alumno = new Alumno(dni, nombre, apellido, legajo);
+        instituto.registrarPersona(alumno);
+    }
+
     public void inscribirAlumno(){
         System.out.println("Ingrese el nombre del alumno");
         int dni = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Ingrese el nombre del curso:");
         String nombre = scanner.nextLine();
-        instituto.inscribirAlumno();
-        instituto.buscarCurso();
+        try{
+            instituto.InscribirAlumnoACurso(dni, nombre);
+        } catch(InscripcionException e) {
+            System.out.println("ERROR "+e.getMessage());
+        }finally{
+            System.out.println("Operacion finalizada");
+            System.out.println();
+            System.out.println("Cursos inscriptos del alumno:");
+            Alumno alumno = instituto.buscarAlumno(dni);
+            if (alumno != null) {
+                alumno.mostrarCursos();
+            }
+        }
+        
     }
 
+    public void  darDeBaja(){
+        System.out.println("Ingrese el dni del alumno:");
+        int dni = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Ingrese el nombre del curso al que desea dar de baja:");
+        String nombre = scanner.nextLine();
+
+        Alumno alumno = instituto.buscarAlumno(dni);
+        Curso curso = instituto.buscarCurso(nombre);
+        if (alumno == null || curso == null){
+            System.out.println("Alumno o curso no encontrado");
+            return;
+        }
+        alumno.darDeBaja(curso);
+    }
+
+    public void mostrarAbiertos(){
+        List<Curso> cursosAbirtos = instituto.mostrarCursosAbiertos();
+        for (Curso curso:cursosAbirtos){
+            curso.monstrarInfo();
+        }
+    }
+
+    public void mostrarOrdenados(){
+        instituto.mostrarCursosOrdenados();
+    }
+    
+    public void mostrarInscriptos(){
+        System.out.println("Ingrese el nombre del curso que desea ver:");
+        String nombre = scanner.nextLine();
+        long cantidad = instituto.contarInscriptos(nombre);
+        if(cantidad ==0){
+            System.out.println("No hay inscriptos en este curso");
+        }else{
+            System.out.println("Hay un total de "+cantidad+" inscriptos en este curso");
+        }
+
+    }
+    
     //**INICIAR
     public void Iniciar(){
         int opcion; //va a servir para saber que eleccion va a tomar el usuario
@@ -77,19 +147,43 @@ public class Menu {
             System.out.println("Bienvenido al programa! Por favor selecione una de las opciones");
             System.out.println();
             System.out.println("1. Agregar curso");
-            System.out.println("2. Inscribir alumno");
-            System.out.println("3. Mostrar cursos abiertos");
+            System.out.println("2. Registrar alumno");
+            System.out.println("3. Inscribir alumno");
+            System.out.println("4. Dar de baja inscripcion");
+            System.out.println("5. Mostrar cursos abiertos");
+            System.out.println("6. Mostrar oferta ordenada por nombre");
+            System.out.println("7. Mostrar cantidad de inscriptos en el curso");
             System.out.println("0. Salir");
             System.out.println();
 
             opcion = scanner.nextInt();
             switch (opcion) {
+                case 0:
+                    System.out.println("Saliendo...");
+                    System.out.println("El programa a sido finalizado");
                 case 1:
                     agregarCurso();
                     break;
                 case 2:
-
+                    registrarAlumno();
+                    break;
+                case 3:
+                    inscribirAlumno();
+                    break;
+                case 4:
+                    darDeBaja();
+                    break;
+                case 5:
+                    mostrarAbiertos();
+                    break;
+                case 6:
+                    mostrarOrdenados();
+                    break;
+                case 7:
+                    mostrarInscriptos();
+                    break;
                 default:
+                    System.out.println("Valor ingresado errroneo, intente de nuevo...");
                     break;
             }
         } while (opcion != 0);
