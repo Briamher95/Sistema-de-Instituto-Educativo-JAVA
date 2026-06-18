@@ -6,19 +6,28 @@ import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
+import java.util.HashSet;
 
 import dominio.Persona;
 import dominio.Curso;
 import dominio.Alumno;
+import dominio.interfaces.IRepositorio;
+import excepciones.InscripcionException;
 
 public class Instituto {
 
     private ArrayList<Curso> cursos;
     private HashMap<Integer, Persona> personas;
+    private HashSet<Persona> alumnosInscriptos;
+    private IRepositorio repositorio;
+    private IRepositorio repositorioPersonas;
 
     public Instituto(){
         this.cursos = new ArrayList<>();
         this.personas = new HashMap<>();
+        this.alumnosInscriptos = new HashSet<>();
+        this.repositorio = new Repositorio("cursos.dat");
+        this.repositorioPersonas = new Repositorio("personas.dat");
     }
  //Getters y Setters
     public ArrayList<Curso> getCursos() {
@@ -41,6 +50,7 @@ public class Instituto {
 
     // para agregar un curso al instituto
     public void agregarCurso(Curso c){
+        c.setId(cursos.size()+1);
         cursos.add(c);
         System.out.println(c.getNombre() + " fue agregado a la lista");
     }
@@ -67,10 +77,8 @@ public class Instituto {
     //Mostrar los cursosOrdenados por nombre
     public void mostrarCursosOrdenados(){
         System.out.println("Cursos ordenados por nombre:");
-        cursos.stream()
-                .sorted()
-                //Se lee como "para cada elemento, llamá al mostrarInfo de Curso"
-                .forEach(Curso::monstrarInfo);
+        Collections.sort(cursos);
+        cursos.forEach(Curso::monstrarInfo);
     }
 
     //Mostrar cursos Ordenanos por Cupo
@@ -91,7 +99,6 @@ public class Instituto {
 
     //Busca alumnos por el Dni
     //Santi esta es el metodo que tenes que usar para que el menu pueda buscar a los alumnos por su dni y mostrar su info, si te da null es poruq no hay ninguno.
-
     public Alumno buscarAlumno( int dni){
 
         Persona p = personas.get(dni);
@@ -113,5 +120,31 @@ public class Instituto {
                                 .count();
     }
 
+    public void InscribirAlumnoACurso(int dni, String nombreCurso) throws InscripcionException{
+        Alumno alumno = buscarAlumno(dni);
+        Curso curso = buscarCurso(nombreCurso);
+        if (alumno == null || curso == null) {
+            System.out.println("Alumno o curso no encontrado");
+            return;
+        }
+        alumno.inscribirCurso(curso);
+        alumnosInscriptos.add(alumno);
+
+    }
+
+    public  void guardarDatos(){
+        repositorio.guardar(cursos);
+        repositorioPersonas.guardar(personas);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void cargarDatos(){
+        Object objCursos = repositorio.consultar();
+        if (objCursos != null) cursos = (ArrayList<Curso>) objCursos;
+
+        Object objPersonas = repositorioPersonas.consultar();
+        if (objPersonas != null) personas = (HashMap<Integer, Persona>) objPersonas;
+
+    }
 
 }   
