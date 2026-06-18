@@ -12,17 +12,20 @@ import dominio.Persona;
 import dominio.Curso;
 import dominio.Alumno;
 import dominio.interfaces.InscripcionException;
+import dominio.interfaces.IRepositorio;
 
 public class Instituto {
 
     private ArrayList<Curso> cursos;
     private HashMap<Integer, Persona> personas;
     private HashSet<Persona> alumnosInscriptos;
+    private IRepositorio repositorio;
 
     public Instituto(){
         this.cursos = new ArrayList<>();
         this.personas = new HashMap<>();
         this.alumnosInscriptos = new HashSet<>();
+        this.repositorio = new Repositorio("cursos.dat");
     }
  //Getters y Setters
     public ArrayList<Curso> getCursos() {
@@ -129,5 +132,13 @@ public class Instituto {
 
     }
 
+    public  void guardarDatos(){
+        repositorio.guardar(cursos);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void cargarDatos(){
+        cursos = (ArrayList<Curso>) repositorio.consultar();
+    }
 
 }   
