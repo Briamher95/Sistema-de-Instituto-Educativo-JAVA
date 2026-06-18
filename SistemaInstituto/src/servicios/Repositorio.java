@@ -42,8 +42,4 @@ public class Repositorio implements IRepositorio {
         }
     }
 
-<<<<<<< HEAD
 } 
-=======
-}
->>>>>>> main
