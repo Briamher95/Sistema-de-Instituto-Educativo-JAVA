@@ -129,6 +129,6 @@ public abstract class Curso implements IInscribible, Serializable, Comparable<Cu
     // Permite ordenar los cursos alfabéticamente por nombre.
     @Override
     public int compareTo(Curso c) {
-        return this.nombre.compareTo(c.getNombre());
+        return this.nombre.compareToIgnoreCase(c.getNombre());
     }
 }

@@ -43,7 +43,8 @@ public class Menu {
                 System.out.println("Ingrese las horas semanales:");
                 int horas = scanner.nextInt();
                 System.out.println("Ingrese correlativa:");
-                instituto.agregarCurso(new Materia(0, nombre, cupoMax, 0, estado, horas, estadoStr));
+                String correlativa = scanner.nextLine();
+                instituto.agregarCurso(new Materia(0, nombre, cupoMax, 0, estado, horas, correlativa));
                 break;
             case 2:
                 System.out.println("Ingresar materiales requeridos:");
@@ -86,7 +87,7 @@ public class Menu {
         int dni = scanner.nextInt();
         scanner.nextLine();
         //Mostramos para mayor legilibilidad
-        instituto.mostrarCursosAbiertos();
+        instituto.mostrarCursosOrdenados();
         System.out.println("Ingrese el nombre del curso:");
         String nombre = scanner.nextLine();
         try{
@@ -146,6 +147,15 @@ public class Menu {
     
     //**INICIAR
     public void Iniciar(){
+        System.out.println(" __      _______     _______         _______. ");
+System.out.println("|  |    |   ____|   |   ____|       /       | ");
+System.out.println("|  |    |  |__      |  |__         |   (----` ");
+System.out.println("|  |    |   __|     |   __|         \\   \\   ");
+System.out.println("|  |    |  |        |  |____    .----)   |    ");
+System.out.println("|__|    |__|        |_______|   |_______/     ");
+System.out.println();
+System.out.println("  Brayan | Fausto | Santino");
+System.out.println();
         instituto.cargarDatos();
         int opcion; //va a servir para saber que eleccion va a tomar el usuario
         do{
