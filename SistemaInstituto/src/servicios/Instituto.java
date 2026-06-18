@@ -11,8 +11,8 @@ import java.util.HashSet;
 import dominio.Persona;
 import dominio.Curso;
 import dominio.Alumno;
-import dominio.interfaces.IRepositorio;
 import excepciones.InscripcionException;
+import dominio.interfaces.IRepositorio;
 
 public class Instituto {
 
@@ -20,14 +20,13 @@ public class Instituto {
     private HashMap<Integer, Persona> personas;
     private HashSet<Persona> alumnosInscriptos;
     private IRepositorio repositorio;
-    private IRepositorio repositorioPersonas;
+    private int ultimoId = 0;
 
     public Instituto(){
         this.cursos = new ArrayList<>();
         this.personas = new HashMap<>();
         this.alumnosInscriptos = new HashSet<>();
         this.repositorio = new Repositorio("cursos.dat");
-        this.repositorioPersonas = new Repositorio("personas.dat");
     }
  //Getters y Setters
     public ArrayList<Curso> getCursos() {
@@ -42,6 +41,9 @@ public class Instituto {
         return personas;
     }
 
+    public int getUltimoId(){
+        return ultimoId;
+    }
     public void setPersonas(HashMap<Integer, Persona> personas) {
         this.personas = personas;
     }
@@ -50,7 +52,6 @@ public class Instituto {
 
     // para agregar un curso al instituto
     public void agregarCurso(Curso c){
-        c.setId(cursos.size()+1);
         cursos.add(c);
         System.out.println(c.getNombre() + " fue agregado a la lista");
     }
@@ -78,8 +79,10 @@ public class Instituto {
     //Mostrar los cursosOrdenados por nombre
     public void mostrarCursosOrdenados(){
         System.out.println("Cursos ordenados por nombre:");
-        Collections.sort(cursos);
-        cursos.forEach(Curso::monstrarInfo);
+        cursos.stream()
+                .sorted()
+                //Se lee como "para cada elemento, llamá al mostrarInfo de Curso"
+                .forEach(Curso::monstrarInfo);
     }
 
     //Mostrar cursos Ordenanos por Cupo
@@ -135,17 +138,11 @@ public class Instituto {
 
     public  void guardarDatos(){
         repositorio.guardar(cursos);
-        repositorioPersonas.guardar(personas);
     }
 
     @SuppressWarnings("unchecked")
     public void cargarDatos(){
-        Object objCursos = repositorio.consultar();
-        if (objCursos != null) cursos = (ArrayList<Curso>) objCursos;
-
-        Object objPersonas = repositorioPersonas.consultar();
-        if (objPersonas != null) personas = (HashMap<Integer, Persona>) objPersonas;
-
+        cursos = (ArrayList<Curso>) repositorio.consultar();
     }
 
 }   

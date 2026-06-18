@@ -1,8 +1,7 @@
 package dominio;
 import java.util.ArrayList;
-
-import enums.EstadoCurso;
 import excepciones.InscripcionException;
+import enums.EstadoCurso;
 
 public class Alumno extends Persona{
     private ArrayList<Curso> cursosInscriptos;
@@ -69,3 +68,4 @@ public class Alumno extends Persona{
     }
 
 }
+
