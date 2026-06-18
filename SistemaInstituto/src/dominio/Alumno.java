@@ -1,6 +1,6 @@
 package dominio;
 import java.util.ArrayList;
-import dominio.interfaces.InscripcionException;
+import excepciones.InscripcionException;
 import enums.EstadoCurso;
 
 public class Alumno extends Persona{

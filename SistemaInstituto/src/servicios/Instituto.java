@@ -11,7 +11,7 @@ import java.util.HashSet;
 import dominio.Persona;
 import dominio.Curso;
 import dominio.Alumno;
-import dominio.interfaces.InscripcionException;
+import excepciones.InscripcionException;
 import dominio.interfaces.IRepositorio;
 
 public class Instituto {
@@ -20,6 +20,7 @@ public class Instituto {
     private HashMap<Integer, Persona> personas;
     private HashSet<Persona> alumnosInscriptos;
     private IRepositorio repositorio;
+    private int ultimoId = 0;
 
     public Instituto(){
         this.cursos = new ArrayList<>();
@@ -40,6 +41,9 @@ public class Instituto {
         return personas;
     }
 
+    public int getUltimoId(){
+        return ultimoId;
+    }
     public void setPersonas(HashMap<Integer, Persona> personas) {
         this.personas = personas;
     }

@@ -2,7 +2,7 @@ package dominio;
 import java.util.List;
 import java.util.Scanner;
 
-import dominio.interfaces.InscripcionException;
+import excepciones.InscripcionException;
 import enums.EstadoCurso;
 import servicios.Instituto;
 
@@ -33,6 +33,7 @@ public class Menu {
         int cupoMax = scanner.nextInt();
         scanner.nextLine();
 
+        //PENSAR EN SACAR
         System.out.println("Ingrese el estado (ABIERTO, CERRADO, CANCELADO):");
         String estadoStr = scanner.nextLine();
         EstadoCurso estado = EstadoCurso.valueOf(estadoStr.toUpperCase());
@@ -44,7 +45,7 @@ public class Menu {
                 scanner.nextLine();
                 System.out.println("Agregue las correlativas:");
                 String correlativa = scanner.nextLine();
-                instituto.agregarCurso(new Materia(0, nombre, cupoMax, 0, estado, horas, correlativa));
+                instituto.agregarCurso(new Materia(instituto.getUltimoId(), nombre, cupoMax, 0, estado, horas, correlativa));
                 break;
             case 2:
                 System.out.println("Ingresar materiales requeridos:");
@@ -203,7 +204,7 @@ public class Menu {
                     break;
                 case 3:
                     inscribirAlumno();
-                    break;
+                    // break;
                 case 4:
                     darDeBaja();
                     break;
