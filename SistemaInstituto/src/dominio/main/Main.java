@@ -58,7 +58,11 @@ public class Main {
         instituto.getCursos().add(tallerProgramacion);
         instituto.getCursos().add(seminarioLiderazgo);
 
-        instituto.mostrarCursosAbiertos();
+        System.out.println("-------------CURSOS ABIERTOS----------:");
+        instituto.mostrarCursosAbiertos().forEach(c -> c.monstrarInfo());
+
+        System.out.println("-------------------CURSOS ORDENADOS-------------------------");
+        instituto.mostrarCursosOrdenados();
     
     }
 }
