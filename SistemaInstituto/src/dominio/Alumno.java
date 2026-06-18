@@ -1,6 +1,5 @@
 package dominio;
 import java.util.ArrayList;
-
 import dominio.interfaces.InscripcionException;
 import enums.EstadoCurso;
 
