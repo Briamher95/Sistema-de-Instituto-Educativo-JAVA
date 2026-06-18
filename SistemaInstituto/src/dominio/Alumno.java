@@ -20,19 +20,12 @@ public class Alumno extends Persona{
         System.out.println("Nombre:"+ getNombre());  
         System.out.println("Apellido:"+ getApellido());
         System.out.println("Legajo:"+ legajo);
-        
-        //verificar si el alumno posee cursos inscriptos mediante isEmpty()
-        if(cursosInscriptos.isEmpty()){
-            System.out.println("No se encuentra inscripto a ningun curso");
-        }else{
-            System.out.println("Cursos inscriptos:");
-            for(Curso curso : cursosInscriptos){
-                System.out.println("- " + curso.getNombre());
-            }
-        }
     }
     //**METODO INSCRIBIR CURSO**
     public void inscribirCurso(Curso c) throws InscripcionException {
+        if(cursosInscriptos.contains(c)){
+            throw new InscripcionException("El alumno ya se encuentra inscripto en este curso.");
+        }
         if(c.getEstado() == EstadoCurso.CERRADO){
             throw new InscripcionException("Inscripcion rechazada. El curso esta cerrado");
         } else if (c.getEstado() == EstadoCurso.CANCELADO){
@@ -48,10 +41,17 @@ public class Alumno extends Persona{
             System.out.println("El alumno no esta inscripto a la materia");
         }else {
             cursosInscriptos.remove(c);
+            System.out.println("Alumno dado de baja correctamente.");
         }
     }
-    //**METODO MOSTRAR CURSOS**
-    public void mostrarCursos(){
+    ///**METODO MOSTRAR CURSOS**
+    public void mostrarCursos() {
+
+        if(cursosInscriptos.isEmpty()){
+            System.out.println("El alumno no posee cursos.");
+            return;
+        }
+
         System.out.println("Cursos inscriptos:");
         for(Curso c : cursosInscriptos){
             c.monstrarInfo();
