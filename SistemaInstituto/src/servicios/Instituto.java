@@ -65,7 +65,6 @@ public class Instituto {
 
                 return encontrado;
     }
-
     // Muestra los cursos abiertos
     //Santi de aca tenes que agarrar la Lista de cursos abiertos para mostrarla con el menu.
     public List<Curso> mostrarCursosAbiertos(){

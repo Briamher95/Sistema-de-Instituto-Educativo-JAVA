@@ -23,32 +23,21 @@ public class Materia extends Curso {
         this.correlativa = correlativa;
     }
 
-    
-
     public Integer getHorasSemanales() {
         return horasSemanales;
     }
-
-
 
     public void setHorasSemanales(Integer horasSemanales) {
         this.horasSemanales = horasSemanales;
     }
 
-
-
     public String getCorrelativa() {
         return correlativa;
     }
 
-
-
     public void setCorrelativa(String correlativa) {
         this.correlativa = correlativa;
     }
-
-    //Métodos 
-
 
     // Implementación obligatoria del método abstracto definido en Curso.
     @Override
