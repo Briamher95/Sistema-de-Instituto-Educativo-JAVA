@@ -4,7 +4,7 @@ import enums.EstadoCurso;
 import java.io.Serializable;
 
 
-public abstract class Curso implements IInscribible , Serializable 
+public abstract class Curso implements IInscribible , Serializable, Comparable<Curso> 
 {
     private Integer id;
     private String nombre;
@@ -99,5 +99,18 @@ public abstract class Curso implements IInscribible , Serializable
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Curso other = (Curso) obj;
+        return this.id.equals(other.id);
+}
 
+    @Override
+    public int compareTo(Curso c) {
+        return this.nombre.compareTo(c.getNombre());
+    }
+    
 }
