@@ -25,13 +25,14 @@ public class Menu {
         System.out.println("3. Seminario");
 
         int tipo = scanner.nextInt();
-
+        scanner.nextLine();
         System.out.println("Ingrese el nombre: ");
         String nombre = scanner.nextLine();
         
         System.out.println("Ingrese el cupo maximo");
         int cupoMax = scanner.nextInt();
-        
+        scanner.nextLine();
+
         System.out.println("Ingrese el estado (ABIERTO, CERRADO, CANCELADO):");
         String estadoStr = scanner.nextLine();
         EstadoCurso estado = EstadoCurso.valueOf(estadoStr.toUpperCase());
@@ -40,8 +41,10 @@ public class Menu {
             case 1:
                 System.out.println("Ingrese las horas semanales:");
                 int horas = scanner.nextInt();
-                System.out.println("Ingrese correlativa:");
-                instituto.agregarCurso(new Materia(0, nombre, cupoMax, 0, estado, horas, estadoStr));
+                scanner.nextLine();
+                System.out.println("Agregue las correlativas:");
+                String correlativa = scanner.nextLine();
+                instituto.agregarCurso(new Materia(0, nombre, cupoMax, 0, estado, horas, correlativa));
                 break;
             case 2:
                 System.out.println("Ingresar materiales requeridos:");
@@ -53,6 +56,7 @@ public class Menu {
             case 3:
                 System.out.println("Ingrese duracion de dias:");
                 int duracion = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println("Es virtual (true/false):");
                 boolean esVirtual = scanner.nextBoolean();
                 instituto.agregarCurso(new Seminario(0, nombre, cupoMax, 0, estado, duracion, esVirtual));
@@ -61,6 +65,11 @@ public class Menu {
                 break;
         }
         System.out.println("Curso agregado exitosamente");
+        System.out.println();
+        instituto.guardarDatos();
+        System.out.println("Presione Enter para continuar...");
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
     public void registrarAlumno(){
@@ -77,10 +86,16 @@ public class Menu {
 
         Alumno alumno = new Alumno(dni, nombre, apellido, legajo);
         instituto.registrarPersona(alumno);
+
+        instituto.guardarDatos();
+
+        System.out.println("Presione Enter para continuar...");
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
     public void inscribirAlumno(){
-        System.out.println("Ingrese el nombre del alumno");
+        System.out.println("Ingrese el dni del alumno");
         int dni = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Ingrese el nombre del curso:");
@@ -98,7 +113,10 @@ public class Menu {
                 alumno.mostrarCursos();
             }
         }
-        
+        instituto.guardarDatos();
+        System.out.println("Presione Enter para continuar...");
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
     public void  darDeBaja(){
@@ -115,6 +133,12 @@ public class Menu {
             return;
         }
         alumno.darDeBaja(curso);
+
+        instituto.guardarDatos();
+
+        System.out.println("Presione Enter para continuar...");
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
     public void mostrarAbiertos(){
@@ -122,6 +146,9 @@ public class Menu {
         for (Curso curso:cursosAbirtos){
             curso.monstrarInfo();
         }
+        System.out.println("Presione Enter para continuar...");
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
     public void mostrarOrdenados(){
@@ -132,12 +159,16 @@ public class Menu {
         System.out.println("Ingrese el nombre del curso que desea ver:");
         String nombre = scanner.nextLine();
         long cantidad = instituto.contarInscriptos(nombre);
+        scanner.nextLine();
         if(cantidad ==0){
             System.out.println("No hay inscriptos en este curso");
         }else{
             System.out.println("Hay un total de "+cantidad+" inscriptos en este curso");
         }
 
+        System.out.println("Presione Enter para continuar...");
+        scanner.nextLine();
+        scanner.nextLine();
     }
     
     //**INICIAR
@@ -145,7 +176,7 @@ public class Menu {
         instituto.cargarDatos();
         int opcion; //va a servir para saber que eleccion va a tomar el usuario
         do{
-            System.out.println("Bienvenido al programa! Por favor selecione una de las opciones");
+            System.out.println("Selecione una de las opciones");
             System.out.println();
             System.out.println("1. Agregar curso");
             System.out.println("2. Registrar alumno");
@@ -163,6 +194,7 @@ public class Menu {
                     instituto.guardarDatos();
                     System.out.println("Saliendo...");
                     System.out.println("El programa a sido finalizado");
+                    break;
                 case 1:
                     agregarCurso();
                     break;
