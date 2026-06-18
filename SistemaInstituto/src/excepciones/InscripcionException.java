@@ -1,4 +1,4 @@
-package dominio.interfaces;
+package excepciones;
 
 public class InscripcionException extends Exception{
     public InscripcionException(String msg){

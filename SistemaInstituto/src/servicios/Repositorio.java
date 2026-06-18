@@ -4,8 +4,6 @@ import dominio.interfaces.IRepositorio;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -34,14 +32,13 @@ public class Repositorio implements IRepositorio {
     }
     //Reconstruye el objeto a partir de los bytes guardados en el archivo
     @Override
-    public List<?> consultar() {
-        if (!archivo.exists()) return new ArrayList<>();
+    public Object consultar() {
+        if (!archivo.exists()) return  null;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-            //Se castea a lista
-            return (List<?>) ois.readObject();
+            return ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error al leer: " + e.getMessage());
-            return new ArrayList<>();
+            return null;
         }
     }
 

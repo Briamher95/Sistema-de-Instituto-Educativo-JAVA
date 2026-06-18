@@ -2,8 +2,8 @@ package dominio;
 import java.util.List;
 import java.util.Scanner;
 
-import dominio.interfaces.InscripcionException;
 import enums.EstadoCurso;
+import excepciones.InscripcionException;
 import servicios.Instituto;
 
 public class Menu {
@@ -25,12 +25,14 @@ public class Menu {
         System.out.println("3. Seminario");
 
         int tipo = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer después de leer un número
 
         System.out.println("Ingrese el nombre: ");
         String nombre = scanner.nextLine();
         
         System.out.println("Ingrese el cupo maximo");
         int cupoMax = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer después de leer un número
         
         System.out.println("Ingrese el estado (ABIERTO, CERRADO, CANCELADO):");
         String estadoStr = scanner.nextLine();
@@ -80,9 +82,11 @@ public class Menu {
     }
 
     public void inscribirAlumno(){
-        System.out.println("Ingrese el nombre del alumno");
+        System.out.println("Ingrese el dni del alumno");
         int dni = scanner.nextInt();
         scanner.nextLine();
+        //Mostramos para mayor legilibilidad
+        instituto.mostrarCursosAbiertos();
         System.out.println("Ingrese el nombre del curso:");
         String nombre = scanner.nextLine();
         try{
@@ -158,11 +162,13 @@ public class Menu {
             System.out.println();
 
             opcion = scanner.nextInt();
+            scanner.nextLine(); // Limpiar el buffer después de leer un número
             switch (opcion) {
                 case 0:
                     instituto.guardarDatos();
                     System.out.println("Saliendo...");
                     System.out.println("El programa a sido finalizado");
+                    break;
                 case 1:
                     agregarCurso();
                     break;
