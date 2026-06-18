@@ -17,6 +17,16 @@ public class Alumno extends Persona{
         System.out.println("Nombre:"+ getNombre());  
         System.out.println("Apellido:"+ getApellido());
         System.out.println("Legajo:"+ legajo);
+        
+        //verificar si el alumno posee cursos inscriptos mediante isEmpty()
+        if(cursosInscriptos.isEmpty()){
+            System.out.println("No se encuentra inscripto a ningun curso");
+        }else{
+            System.out.println("Cursos inscriptos:");
+            for(Curso curso : cursosInscriptos){
+                System.out.println("- " + curso.getNombre());
+            }
+        }
     }
 
     public void inscribirCurso(Curso c){
