@@ -47,7 +47,7 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
     
     }
 
-    //***HASHCODE & EQUALS***
+    //***HASHCODE & EQUALS comparar ***
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -68,7 +68,7 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
         return dni == other.dni;
     }
 
-    //***CompareTo***
+    //***CompareTo ordenar ***
     @Override
     public int compareTo(Persona p){
         return this.getApellido().compareTo(p.getApellido());
