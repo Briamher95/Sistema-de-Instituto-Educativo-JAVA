@@ -79,6 +79,7 @@ public class Instituto {
     public void ordenarPorCupo(){
         Comparator<Curso> porCupo = (c1,c2) -> c1.getCupoMaximo().compareTo(c2.getCupoMaximo());
         Collections.sort(cursos,porCupo);
+        cursos.forEach(Curso::monstrarInfo);
     }
 
 
