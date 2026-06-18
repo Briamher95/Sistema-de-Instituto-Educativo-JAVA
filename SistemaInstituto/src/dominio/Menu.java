@@ -33,7 +33,7 @@ public class Menu {
         int cupoMax = scanner.nextInt();
         scanner.nextLine();
 
-        //PENSAR EN SACAR
+        //PENSAR EN SACAR DEL CODIGO
         System.out.println("Ingrese el estado (ABIERTO, CERRADO, CANCELADO):");
         String estadoStr = scanner.nextLine();
         EstadoCurso estado = EstadoCurso.valueOf(estadoStr.toUpperCase());
